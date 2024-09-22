@@ -71,7 +71,7 @@ async function loginUser(req, res) {
     const token = jwt.sign(
       { userId: data.id, isPremium: data.is_premium },
       JWT_SECRET,
-      { expiresIn: '1h' } 
+      { expiresIn: '1d' } 
     );
 
     return res.status(200).json({ message: 'Login successful', token });
