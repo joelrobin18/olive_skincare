@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
+const brandRoutes = require('./routes/brandRoutes'); 
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/ingredients', ingredientRoutes);
+app.use('/api/brands', brandRoutes);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
