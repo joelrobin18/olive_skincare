@@ -207,10 +207,11 @@ const createTables = async () => {
         name VARCHAR(100) NOT NULL,
         brand_id INT,
         category VARCHAR(100) NOT NULL,
-        ingredients JSON,
         is_for_kids BOOLEAN DEFAULT FALSE,
         contains_carcinogen BOOLEAN DEFAULT FALSE,
         FOREIGN KEY (brand_id) REFERENCES brands(id) ON DELETE CASCADE
+        created_by TEXT
+        description TEXT
       );
     `);
 
