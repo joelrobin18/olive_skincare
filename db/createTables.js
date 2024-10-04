@@ -150,20 +150,20 @@
 
 // createTables();
 
-require('dotenv').config();
-const mysql = require('mysql2/promise');
+require('dotenv').config()
+const mysql = require('mysql2/promise')
 
 // Connect to MySQL database
 const client = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'joelrobin',
-  database: process.env.DB_NAME || 'skincare',
-});
+  database: process.env.DB_NAME || 'skincare'
+})
 
 const createTables = async () => {
   try {
-    const connection = await client.getConnection();
+    const connection = await client.getConnection()
 
     // Create Users Table
     await connection.query(`
@@ -178,7 +178,7 @@ const createTables = async () => {
         allergies JSON,
         is_premium BOOLEAN DEFAULT FALSE
       );
-    `);
+    `)
 
     // Create Brands Table
     await connection.query(`
@@ -187,7 +187,7 @@ const createTables = async () => {
         name VARCHAR(100) NOT NULL,
         official_website VARCHAR(200)
       );
-    `);
+    `)
 
     // Create Ingredients Table
     await connection.query(`
@@ -198,7 +198,7 @@ const createTables = async () => {
         is_carcinogen BOOLEAN DEFAULT FALSE,
         not_suitable_for_babies BOOLEAN DEFAULT FALSE
       );
-    `);
+    `)
 
     // Create Products Table
     await connection.query(`
@@ -213,7 +213,7 @@ const createTables = async () => {
         created_by TEXT
         description TEXT
       );
-    `);
+    `)
 
     // Create ProductIngredients Table for Many-to-Many relationship
     await connection.query(`
@@ -225,7 +225,7 @@ const createTables = async () => {
         FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
         FOREIGN KEY (ingredient_id) REFERENCES ingredients(id) ON DELETE CASCADE
       );
-    `);
+    `)
 
     // Create Routines Table
     await connection.query(`
@@ -240,7 +240,7 @@ const createTables = async () => {
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
       );
-    `);
+    `)
 
     // Create Reviews Table
     await connection.query(`
@@ -254,7 +254,7 @@ const createTables = async () => {
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
       );
-    `);
+    `)
 
     // Create ScannerUsage Table
     await connection.query(`
@@ -266,7 +266,7 @@ const createTables = async () => {
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
       );
-    `);
+    `)
 
     // Create SaleNotifications Table
     await connection.query(`
@@ -279,7 +279,7 @@ const createTables = async () => {
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (brand_id) REFERENCES brands(id) ON DELETE CASCADE
       );
-    `);
+    `)
 
     // Create Dermatologists Table
     await connection.query(`
@@ -290,7 +290,7 @@ const createTables = async () => {
         contact_info VARCHAR(200),
         rating FLOAT
       );
-    `);
+    `)
 
     // Create Appointments Table
     await connection.query(`
@@ -304,15 +304,15 @@ const createTables = async () => {
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
         FOREIGN KEY (dermatologist_id) REFERENCES dermatologists(id) ON DELETE CASCADE
       );
-    `);
+    `)
 
-    console.log('Tables created successfully!');
-    connection.release();
+    console.log('Tables created successfully!')
+    connection.release()
   } catch (err) {
-    console.error('Error creating tables:', err);
+    console.error('Error creating tables:', err)
   } finally {
-    client.end();
+    client.end()
   }
-};
+}
 
-createTables();
+createTables()

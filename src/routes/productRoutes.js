@@ -1,5 +1,5 @@
 // src/routes/productRoutes.js
-const express = require('express');
+const express = require('express')
 const {
   createProduct,
   getProductDetails,
@@ -8,19 +8,19 @@ const {
   searchProducts,
   getProductsForKids,
   getProductsWithCarcinogens,
-  getAllProducts,
-} = require('../controllers/productController');
-const authenticateUser = require('../middlewares/authMiddleware');
+  getAllProducts
+} = require('../controllers/productController')
+const authenticateUser = require('../middlewares/authMiddleware')
 
-const router = express.Router();
+const router = express.Router()
 
-router.post('/create', authenticateUser, createProduct);
-router.get('/all/search', authenticateUser, searchProducts);
-router.get('/search/kids', authenticateUser, getProductsForKids);
-router.get('/search/carcinogens', authenticateUser, getProductsWithCarcinogens);
-router.get('/:id', authenticateUser, getProductDetails);
-router.put('/:id', authenticateUser, updateProduct);
-router.delete('/:id', authenticateUser, deleteProduct);
-router.get('/', authenticateUser, getAllProducts);
+router.post('/create', authenticateUser, createProduct)
+router.get('/all/search', authenticateUser, searchProducts)
+router.get('/search/kids', authenticateUser, getProductsForKids)
+router.get('/search/carcinogens', authenticateUser, getProductsWithCarcinogens)
+router.get('/:id', authenticateUser, getProductDetails)
+router.put('/:id', authenticateUser, updateProduct)
+router.delete('/:id', authenticateUser, deleteProduct)
+router.get('/', authenticateUser, getAllProducts)
 
-module.exports = router;
+module.exports = router
